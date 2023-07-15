@@ -1,0 +1,35 @@
+{% extends 'layout.html' %} {% block body %}
+<div class="jumbotron" style="background-color: #f7f7f7;">
+    <h1>Blood Requests</h1>
+    <hr class="my-4"> {% if requests %}
+    <form method="POST">
+        <table class="table table-striped">
+            <tr>
+                <th>Contact Id</th>
+                <th>Name</th>
+                <th>Blood Group</th>
+                <th>Packets</th>
+                <th>Address</th>
+                <th></th>
+                <th></th>
+            </tr>
+            {% for request in requests %}
+            <tr>
+                <td>{{ request[3] }}</td>
+                <td>{{ request[4] }}</td>
+                <td>{{ request[1] }}</td>
+                <td>{{ request[2] }}</td>
+                <td>{{ request[5] }}</td>
+                <td><a href="{{ url_for('accept', notification_id=request[0]) }}" class="btn btn-success">Accept</a></td>
+
+
+                <td><a href="{{ url_for('decline', notification_id=request[0]) }}" class="btn btn-danger">Decline</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+    {% else %}
+    <p>No requests found</p>
+    {% endif %}
+</div>
+{% endblock %}
